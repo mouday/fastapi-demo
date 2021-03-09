@@ -1,0 +1,41 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+GET http://127.0.0.1:8000/chapter03/body/cookie
+Cookie: cookie_id=xxx
+
+###
+
+
+GET http://127.0.0.1:8000/chapter03/body/header
+cookie-id: xxx
+
+###
+
+POST http://127.0.0.1:8000/chapter07/createData?city_id=1
+Content-Type: application/json
+
+{
+  "date": "2020-01-01",
+  "confirmed": 30,
+  "deaths": 10,
+  "recovered": 20,
+  "city_id": 1
+}
+
+###
+POST http://127.0.0.1:8000/chapter07/createCity
+Content-Type: application/json
+
+{
+  "province": "北京",
+  "country": "中国",
+  "country_code": "001",
+  "country_population": "14"
+}
+
+###

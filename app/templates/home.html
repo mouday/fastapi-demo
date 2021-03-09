@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Demo</title>
+    <!-- jquery -->
+    <script src="{{url_for('static', path='/js/jquery.min.js')}}"></script>
+
+
+    <!--  semantic-ui  -->
+    <link rel="stylesheet" href="{{url_for('static', path='/semantic-ui/semantic.min.css')}}">
+
+    <script src="{{url_for('static', path='/semantic-ui/semantic.min.js')}}"></script>
+
+    <!-- 业务逻辑-->
+    <script>
+        $(document).ready(function () {
+            //过滤
+            $('#filter').click(function () {
+                const city = $('#city').val();
+                window.location.href = window.location.origin + window.location.pathname + '?city=' + city;
+            });
+            //同步
+            $('#sync').click(function () {
+                $.get('/chapter07/sync', function (result) {
+                    alert(result.message);
+                })
+            })
+        })
+    </script>
+
+</head>
+<body>
+
+<div class="ui container">
+    <h1>数据</h1>
+
+    <div style="display: flex;justify-content: space-between;">
+        <div style="display: flex;">
+            <button class="ui button alert-secondary" id="filter" type="submit">查询</button>
+            <div class="ui input">
+                <label for="city"></label>
+                <input type="text" id="city" placeholder="城市">
+            </div>
+        </div>
+
+        <button class="ui button primary" id="sync">同步</button>
+    </div>
+
+    <table class="ui celled table">
+        <thead>
+            <tr>
+                <th>城市</th>
+                <th>日期</th>
+                <th>累计确诊数</th>
+                <th>累计死亡数</th>
+                <th>累计痊愈数</th>
+                <th>更新时间</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row.city.province }}</td>
+                <td>{{ row.date }}</td>
+                <td>{{ row.confirmed }}</td>
+                <td>{{ row.deaths }}</td>
+                <td>{{ row.recovered }}</td>
+                <td>{{ row.updated_at }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+    </table>
+</div>
+</body>
+</html>
